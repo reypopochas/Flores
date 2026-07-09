@@ -1,0 +1,219 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Oculta todo lo que salga de la pantalla */
+    overscroll-behavior: none; /* Evita el "efecto rebote" o pull-to-refresh en celulares */
+    touch-action: none; /* Bloquea cualquier intento de arrastrar o hacer zoom con los dedos */
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    min-height: 100vh; 
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0b111a;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: -5%; 
+    left: -5%;
+    width: 110%;
+    height: 110%;
+    
+    background-image: url("img/background.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+    filter: blur(6px);
+    z-index: -1;
+}
+
+body > * {
+    position: relative;
+    z-index: 1;
+}
+
+
+.ContenedorTitulo1 {
+    text-align: center;
+    width: 80%;
+    max-width: 400px;
+    
+    padding: 20px 30px;
+    border-radius: 15px;
+    
+    font-size: 2.0rem;
+    font-family:'Times New Roman', Times, serif;
+    line-height: 1.5;
+    font-style:oblique;
+    color: rgb(51, 51, 51);
+    position: absolute;
+    transition: opacity 1.5s ease-in-out;
+}
+
+
+.ContenedorTipoFlor {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+    
+
+    opacity: 0; 
+    pointer-events: none; 
+    transition: opacity 1.5s ease-in-out;
+    z-index: 2; 
+}
+
+.TipoFLorTexto {
+    text-align: center;
+
+    width: 80%;
+    max-width: 400px;
+    padding: 20px 30px;
+    border-radius: 15px;
+    font-size: 2.0rem;
+    font-family:'Times New Roman', Times, serif;
+    font-style:oblique;
+    line-height: 1.5;
+}
+
+
+.ContenedorNubes {
+    position: absolute;
+    width: 80vh;
+    height: 50vh; 
+    top: 25%; 
+    z-index: 10; 
+    cursor: pointer;
+}
+
+#nube1{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    bottom: 15%;
+}
+
+#nube2{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 15%
+}
+
+@keyframes flotar {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes flotar-invertido {
+    0% { transform: translateY(0px) rotate(180deg); }
+    50% { transform: translateY(-15px) rotate(180deg); } 
+    100% { transform: translateY(0px) rotate(180deg); }
+}
+
+.flotando {
+    animation: flotar 3s ease-in-out infinite;
+}
+
+
+.flotando-retraso {
+    animation: flotar 3.5s ease-in-out infinite 0.5s;
+}
+
+.volar-derecha {
+    transition: transform 2s ease-in-out, opacity 2s;
+    transform: translateX(150vw) !important; 
+    opacity: 0; 
+}
+
+.volar-izquierda {
+    transition: transform 2s ease-in-out, opacity 2s;
+    transform: translateX(-150vw) !important; 
+    opacity: 0;
+}
+
+.OpcionesFlores {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 25px;
+    width: 90%;
+    max-width: 450px;
+    
+    opacity: 0; 
+    pointer-events: none;
+    transition: opacity 1s ease-in-out;
+}
+
+.TarjetaFlor {
+    background-color: rgba(252, 249, 225, 0.95);
+    border: 2px solid transparent;
+    border-radius: 12px;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.1rem;
+    color: rgb(51, 51, 51);
+}
+
+
+.TarjetaFlor img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+
+.TarjetaFlor:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.TarjetaFlor.seleccionada {
+    border-color: #d4a373;
+    background-color: #ffffff;
+    transform: scale(1.03); 
+}
+
+#BtnConfirmar {
+    margin-top: 30px;
+    padding: 12px 30px;
+    background-color: #d4a373;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.2rem;
+    font-family: 'Times New Roman', Times, serif;
+    cursor: pointer;
+    
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.5s ease-in-out;
+}
+
+#BtnConfirmar:hover {
+    background-color: #bc8a5f;
+    transform: scale(1.05);
+}

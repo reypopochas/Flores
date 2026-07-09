@@ -1,0 +1,148 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Oculta todo lo que salga de la pantalla */
+    overscroll-behavior: none; /* Evita el "efecto rebote" o pull-to-refresh en celulares */
+    touch-action: none; /* Bloquea cualquier intento de arrastrar o hacer zoom con los dedos */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-color: #0b111a; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; 
+    font-family: 'Times New Roman', Times, serif;
+}
+
+#btn-regresar {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 20;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+    transition: all 0.3s ease;
+}
+
+#btn-regresar:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    transform: scale(1.05);
+}
+
+.escena-tulipanes {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* --- CIELO Y LUNA --- */
+.luna-magica {
+    position: absolute;
+    top: 15%;
+    right: 15%;
+    width: 80px;
+    height: 80px;
+    background-color: #f0f4f8;
+    border-radius: 50%;
+    z-index: 1;
+    box-shadow: 
+        0 0 20px 5px rgba(255, 255, 255, 0.4),
+        0 0 60px 20px rgba(100, 150, 255, 0.2);
+    animation: resplandorLuna 4s infinite alternate ease-in-out;
+}
+
+@keyframes resplandorLuna {
+    0% { transform: scale(1); filter: brightness(1); }
+    100% { transform: scale(1.05); filter: brightness(1.2); }
+}
+
+#cielo-estrellado {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.estrella {
+    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+    opacity: 0;
+    animation: titilarEstrella infinite alternate;
+}
+
+@keyframes titilarEstrella {
+    0% { opacity: 0.1; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 5px white; }
+}
+
+/* --- EL JARDÍN DE TULIPANES --- */
+#jardin-tulipanes {
+    position: absolute;
+    bottom: 0; 
+    left: 0;
+    width: 100%;
+    height: 60vh;
+    z-index: 5;
+}
+
+.tulipan {
+    position: absolute;
+    bottom: -10px; 
+    width: var(--ancho); 
+    left: var(--posicion-x);
+    transform-origin: bottom center; 
+    transform: translateY(100%) scale(0.5); 
+    opacity: 0;
+    z-index: var(--capa); 
+    
+    animation: 
+        crecerDelSuelo 1.5s cubic-bezier(0.25, 1, 0.5, 1.2) forwards,
+        balanceoTulipan var(--tiempo-balanceo) ease-in-out infinite alternate;
+    animation-delay: var(--retraso), calc(var(--retraso) + 1.5s);
+}
+
+@keyframes crecerDelSuelo {
+    to {
+        transform: translateY(0) scale(1) rotate(var(--rotacion));
+        opacity: 1;
+    }
+}
+
+@keyframes balanceoTulipan {
+    0% { transform: translateY(0) scale(1) rotate(var(--rotacion)); }
+    100% { transform: translateY(0) scale(1) rotate(calc(var(--rotacion) + 4deg)); }
+}
+
+/* --- TEXTO CENTRADO --- */
+.texto-tulipanes {
+    position: absolute;
+    top: 45%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    color: white;
+    font-size: 1.6rem;
+    text-align: center;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.9);
+    z-index: 20;
+    white-space: pre-wrap;
+}
+
+@media (max-width: 600px) {
+    .texto-tulipanes { font-size: 1.8rem; }
+}

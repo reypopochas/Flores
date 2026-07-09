@@ -1,0 +1,235 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    overscroll-behavior: none;
+    touch-action: none; 
+}
+
+/* --- ESCENA PRINCIPAL --- */
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background: radial-gradient(circle at center, #1a2639 0%, #0b111a 80%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; 
+}
+
+.escena-magica {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* --- LA FLOR SUBIENDO Y BALANCEÁNDOSE --- */
+.envoltura-flor {
+    position: absolute;
+    bottom: 18%;
+    height: 45vh; 
+    max-height: 280px; 
+    display: flex;
+    justify-content: center; 
+    z-index: 2;
+    
+    transform: translateY(150vh); 
+    animation: subirFlor 2s ease-out forwards;
+}
+
+.flor-animada {
+    height: 100%;
+    width: auto;
+    max-width: 60vw; 
+    object-fit: contain; 
+    transform-origin: bottom center; 
+    animation: balanceo-suave 4s infinite ease-in-out alternate;
+}
+
+@keyframes subirFlor {
+    to { transform: translateY(0); }
+}
+
+@keyframes balanceo-suave {
+    0% { transform: rotate(-3deg); }
+    100% { transform: rotate(3deg); }
+}
+
+/* --- EL DOMO QUE CAE DE ARRIBA --- */
+.domo-cristal {
+    position: absolute;
+    bottom: 20%;
+    width: 75vw;
+    max-width: 250px; 
+    height: 55vh; 
+    max-height: 350px;
+    z-index: 5;
+    
+    border: 3px solid rgba(255, 255, 255, 0.4); 
+    border-bottom: 15px solid #3d2314; 
+    border-radius: 150px 150px 10px 10px; 
+    background: linear-gradient(to right, rgba(255,255,255,0.05), rgba(255,255,255,0.01), rgba(255,255,255,0.15));
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1) inset;
+    
+    overflow: hidden; 
+    pointer-events: none;
+
+    transform: translateY(-150vh); 
+    animation: bajarDomo 1.5s cubic-bezier(0.25, 1, 0.5, 1) 2s forwards;
+}
+
+/* --- SOMBRA DEL DOMO --- */
+.sombra-domo {
+    position: absolute;
+    bottom: 16%;
+    width: 65vw;
+    max-width: 220px; 
+    height: 15px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 50%;
+    filter: blur(8px);
+    z-index: 1;
+    
+    opacity: 0;
+    animation: aparecerTexto 1s ease-in 3s forwards;
+}
+
+@keyframes bajarDomo {
+    to { transform: translateY(0); }
+}
+
+/* --- LOS PÉTALOS --- */
+#contenedor-petalos {
+    position: absolute;
+    width: 100%; 
+    height: 100%;
+}
+
+.petalo-cayendo {
+    position: absolute;
+    width: 15px; 
+    animation-name: caer-y-girar;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+
+@keyframes caer-y-girar {
+    0% { 
+        transform: translateY(-20px) rotate(0deg); 
+        opacity: 0; 
+    }
+    10% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { 
+        transform: translateY(50vh) translateX(30px) rotate(360deg); 
+        opacity: 0; 
+    }
+}
+
+/* Texto */
+.texto-arriba {
+    position: absolute;
+    top: 18%;
+    color: white;
+    font-size: 1.4rem;
+    text-align: center;
+    padding: 0 15px;
+    font-family: 'Times New Roman', Times, serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    /*
+    opacity: 0;
+    animation: aparecerTexto 2s ease-in 3.5s forwards;
+    */
+}
+
+.texto-abajo {
+    position: absolute;
+    bottom: 15%;
+    color: white;
+    font-size: 1.2rem;
+    text-align: center;
+    padding: 0 15px;
+    font-family: 'Times New Roman', Times, serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    opacity: 0;
+    animation: aparecerTexto 2s ease-in 3.5s forwards;
+}
+
+@keyframes aparecerTexto {
+    to { opacity: 1; }
+}
+
+
+/* --- BOTÓN DE REGRESAR --- */
+#btn-regresar {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 20; 
+    
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 10px 20px;
+    border-radius: 25px; 
+    
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1rem;
+    cursor: pointer;
+    backdrop-filter: blur(4px); 
+    
+    transition: all 0.3s ease;
+    
+    opacity: 0;
+    pointer-events: none; 
+    animation: aparecerBoton 2s ease-in 4.5s forwards; 
+}
+
+#btn-regresar:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    transform: scale(1.05); 
+}
+
+@keyframes aparecerBoton {
+    to { 
+        opacity: 1; 
+        pointer-events: auto; 
+    }
+}
+
+
+
+
+/* --- LUCIÉRNAGAS MAGICAS --- */
+#luciernagas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.mota-luz {
+    position: absolute;
+    background-color: #ffb6c1; 
+    border-radius: 50%;
+    filter: blur(2px);
+    opacity: 0;
+    animation: flotar-luz linear infinite;
+}
+
+@keyframes flotar-luz {
+    0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+    20% { opacity: 0.6; }
+    80% { opacity: 0.4; }
+    100% { transform: translateY(-20vh) scale(1.5); opacity: 0; }
+}
